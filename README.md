@@ -1,3 +1,3 @@
-`npm i -g webpack`
-`npm i -s babel-core`
-webpack -w
+yarn
+yarn watch
+yarn serve  
