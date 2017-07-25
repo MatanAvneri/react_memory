@@ -1,4 +1,5 @@
 node_modules
 bundle.js
 bundle.js.map
-node_modules
+.idea/
+react_memory.iml
