@@ -1,18 +1,19 @@
-import React from "react";
-import Book from "./book";
+import React from 'react'
+import PropTypes from 'prop-types'
+import Book from './book'
 
 class BookList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { books: this.props.books };
+  constructor (props) {
+    super(props)
+    this.state = {books: this.props.books}
   }
 
-  zebraClass(index) {
-    return index % 2 ? 'even' : 'odd';
+  zebraClass (index) {
+    return index % 2 ? 'even' : 'odd'
   }
 
-  render() {
-    const { books } = this.state;
+  render () {
+    const {books} = this.state
     return (
       <ul className="book-list">
         {
@@ -21,16 +22,16 @@ class BookList extends React.Component {
           })
         }
       </ul>
-    );
+    )
   }
 }
 
 BookList.propTypes = {
-  books: React.PropTypes.arrayOf(React.PropTypes.object)
+  books: PropTypes.arrayOf(React.PropTypes.object)
 }
 
 BookList.defaultProps = {
   books: []
 }
 
-export default BookList;
+export default BookList

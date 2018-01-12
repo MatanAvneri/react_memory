@@ -1,14 +1,14 @@
-import React from "react";
-import Cell from "./cell";
+import React from 'react'
+import Cell from './cell'
 
 class Row extends React.Component {
-  render() {
+  render () {
     return (
       <div className="row">
         {this.props.children}
       </div>
     )
   }
-};
+}
 
-export default Row;
+export default Row

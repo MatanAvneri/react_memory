@@ -1,12 +1,13 @@
-import React from "react";
-import Row from "./row";
-import Cell from "./cell";
+import React from 'react'
+import Row from './row'
+import Cell from './cell'
+import PropTypes from 'prop-types'
 
 class Game extends React.Component {
-  constructor(props) {
-    super(props);
-    this.selectCell = this.selectCell.bind(this);
-    this.pickRandomTargets = this.pickRandomTargets.bind(this);
+  constructor (props) {
+    super(props)
+    this.selectCell = this.selectCell.bind(this)
+    this.pickRandomTargets = this.pickRandomTargets.bind(this)
     this.state = {
       targets: this.pickRandomTargets(),
       selected: [],
@@ -14,78 +15,78 @@ class Game extends React.Component {
     }
   }
 
-  pickRandomTargets() {
-    let numberOfRandomOptions = 4;
-    let targets = [];
+  pickRandomTargets () {
+    let numberOfRandomOptions = 4
+    let targets = []
     for (var i = 0; i < numberOfRandomOptions; i++) {
-      let r = parseInt(Math.random() * this.props.rows, 10);
-      let c = parseInt(Math.random() * this.props.cols, 10);
-      targets.push({ r, c })
+      let r = parseInt(Math.random() * this.props.rows, 10)
+      let c = parseInt(Math.random() * this.props.cols, 10)
+      targets.push({r, c})
     }
-    return targets;
+    return targets
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.timerId = setTimeout(() => {
-      this.setState({ gameState: 'recall' })
-      clearTimeout(this.timerId);
+      this.setState({gameState: 'recall'})
+      clearTimeout(this.timerId)
     }, 2000)
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.timerId);
+  componentWillUnmount () {
+    clearTimeout(this.timerId)
   }
 
-  selectCell(r, c) {
-    this.setState({ selected: this.state.selected.concat({ r, c }) });
+  selectCell (r, c) {
+    this.setState({selected: this.state.selected.concat({r, c})})
   }
 
-  render() {
-    let grid = [], row;
-    const isRecallPhase = this.state.gameState === 'recall';
+  render () {
+    let grid = [], row
+    const isRecallPhase = this.state.gameState === 'recall'
 
-    for(let r = 0; r < this.props.rows; r++ ) {
-      row = [];
-      for(let c = 0; c < this.props.cols; c++ ) {
-        const cellId = `r${r}-c${c}`;
+    for (let r = 0; r < this.props.rows; r++) {
+      row = []
+      for (let c = 0; c < this.props.cols; c++) {
+        const cellId = `r${r}-c${c}`
         row.push(<Cell key={cellId}
-          r={r} c={c}
-          isRecallPhase = {isRecallPhase}
-          selectCell={this.selectCell}
-          targets={this.state.targets}
-          selected={this.state.selected}
-          gameState={this.state.gameState}
-          />)
-        }
-        grid.push(
-          <Row key={r}>
-          {row}
-          </Row>
-        );
+                       r={r} c={c}
+                       isRecallPhase={isRecallPhase}
+                       selectCell={this.selectCell}
+                       targets={this.state.targets}
+                       selected={this.state.selected}
+                       gameState={this.state.gameState}
+        />)
       }
+      grid.push(
+        <Row key={r}>
+          {row}
+        </Row>
+      )
+    }
 
-      return (
-        <div>
+    return (
+      <div>
         {grid}
         <div>
           {this.props.messages[this.state.gameState]}
         </div>
-        <button onClick={ this.props.resetGame }>Play Again</button>
-        </div>
-      )
-    }
-  };
-
-  Game.propTypes = {
-    rows: React.PropTypes.number.isRequired,
-    cols: React.PropTypes.number.isRequired,
+        <button onClick={this.props.resetGame}>Play Again</button>
+      </div>
+    )
   }
+}
 
-  Game.defaultProps = {
-    messages: {
-      challenge: "Remember now..",
-      recall: "Recall now, por favor"
-    }
+Game.propTypes = {
+  rows: PropTypes.number.isRequired,
+  cols: PropTypes.number.isRequired,
+}
+
+Game.defaultProps = {
+  messages: {
+    challenge: 'Remember now..',
+    recall: 'Recall now, por favor'
   }
+}
 
-  export default Game;
+export default Game

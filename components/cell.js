@@ -1,69 +1,69 @@
-import React from "react";
+import React from 'react'
+import PropTypes from 'prop-types'
 
 class Cell extends React.Component {
-  constructor(props) {
-    super(props);
-    this.guess = this.guess.bind(this);
-    this.cellClassName = this.cellClassName.bind(this);
-    this.canBeClicked = this.canBeClicked.bind(this);
+  constructor (props) {
+    super(props)
+    this.guess = this.guess.bind(this)
+    this.cellClassName = this.cellClassName.bind(this)
+    this.canBeClicked = this.canBeClicked.bind(this)
   }
 
-  isTarget() {
-    const { r, c, targets } = this.props;
+  isTarget () {
+    const {r, c, targets} = this.props
     return !!targets.filter(obj => {
       return obj.r === r & obj.c === c
     }).length
   }
 
-  isSelected() {
-    const { r, c, selected } = this.props;
+  isSelected () {
+    const {r, c, selected} = this.props
     return !!selected.filter(obj => {
       return obj.r === r & obj.c === c
     }).length
   }
 
-
-  canBeClicked() {
-    return this.isSelected() || this.props.isRecallPhase;
+  canBeClicked () {
+    return this.isSelected() || this.props.isRecallPhase
   }
 
-  guess() {
-    if(this.canBeClicked()) {
-      this.props.selectCell(this.props.r, this.props.c);
+  guess () {
+    if (this.canBeClicked()) {
+      this.props.selectCell(this.props.r, this.props.c)
     }
   }
 
-  cellClassName() {
-    let className = "cell";
+  cellClassName () {
+    let className = 'cell'
 
-    if(this.isSelected()) {
-      className += ` ${this.isTarget() ? 'guess-true' : 'guess-false'}`;
+    if (this.isSelected()) {
+      className += ` ${this.isTarget() ? 'guess-true' : 'guess-false'}`
     } else if (this.props.gameState === 'challenge') {
-       className += ` ${this.isTarget() ? 'active' : ''}`;
+      className += ` ${this.isTarget() ? 'active' : ''}`
     }
 
-    return className;
+    return className
   }
 
-  render() {
+  render () {
     return (
       <div className={this.cellClassName()}
-        onClick={this.guess}>
+           onClick={this.guess}>
       </div>
     )
   }
 
   // Stage 0
   // static propTypes = {
-  //  r: React.PropTypes.number,
-  //  c: React.PropTypes.number
+  //  r: PropTypes.number,
+  //  c: PropTypes.number
   // }
-};
-
-Cell.propTypes = {
-  r: React.PropTypes.number,
-  c: React.PropTypes.number,
-  selectCell: React.PropTypes.func
 }
 
-export default Cell;
+Cell.propTypes = {
+  r: PropTypes.number,
+  c: PropTypes.number,
+  selectCell: PropTypes.func
+}
+
+export default Cell

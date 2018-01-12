@@ -1,31 +1,31 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react'
+import ReactDOM from 'react-dom'
 import Game from './components/game'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { gameId: 1};
-    this.resetGame = this.resetGame.bind(this);
+  constructor (props) {
+    super(props)
+    this.state = {gameId: 1}
+    this.resetGame = this.resetGame.bind(this)
   }
 
-  resetGame() {
-    this.setState({ gameId: this.state.gameId + 1 })
+  resetGame () {
+    this.setState({gameId: this.state.gameId + 1})
   }
 
-  render() {
+  render () {
     return (
       <div>
-        <Game key={this.state.gameId} resetGame={this.resetGame} rows={5} cols={5} />
+        <Game key={this.state.gameId} resetGame={this.resetGame} rows={5} cols={5}/>
       </div>
     )
   }
 }
 
-console.log('Start');
+console.log('Start')
 
 ReactDOM.render(
-  <App />
+  <App/>
   ,
-  document.getElementById("react")
-);
+  document.getElementById('react')
+)
